@@ -1,0 +1,7 @@
+panel5.setLayout(new GridLayout(1,2));
+        panel5.add(new JLabel("²éÕÒ×Ö·û´®"));
+        panel5.add(new JLabel());
+        panel6.setLayout(new GridLayout(1,2));
+        panel6.add(findtextfield);
+        panel6.add(findbutton);
+        panel7.setLayout(new GridLayout(1,2));

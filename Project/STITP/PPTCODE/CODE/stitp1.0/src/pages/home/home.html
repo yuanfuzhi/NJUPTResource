@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta name="Keywords" content="关键字">
+  <meta name="Description" content="描述">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
+  <script type="text/javascript">
+    document.getElementsByTagName("html")[0].style.fontSize = document.documentElement.clientWidth/10 + "px";
+  </script>
+  <style type="text/css">
+    *{
+      padding: 0;
+      margin: 0;
+    }
+
+    @font-face {
+      font-family: 'iconfont';
+      src: url('font/iconfont.eot');
+      src: url('font/iconfont.eot?#iefix') format('embedded-opentype'),
+      url('font/iconfont.woff') format('woff'),
+      url('font/iconfont.ttf') format('truetype'),
+      url('font/iconfont.svg#iconfont') format('svg');
+    }
+
+    .bg{
+      position: absolute;
+      width: 10rem;
+    }
+    #title{
+      text-align: center;
+      /*文本左右居中。上下居中可以用line-height(行高)设置为容器的高度*/
+      font-size: 1rem;
+       /* 左右自动居中，只能作用在块区域，block，所以图片不行或者把display设置为block*/
+    }
+    #author{
+      text-align: center;
+      font-size: 0.8rem;
+    }
+    .imgS{
+      border: solid 1px #000;
+      border-radius: 50%;
+      width: 8rem;
+      height: 8rem;
+      margin: 1rem 1rem 0.5rem 1rem;
+    }
+    .imgS div{
+      width: 7.2rem;
+      height: 7.2rem;
+      border-radius: 50%;
+      margin: 0.4rem;
+      background-color: rgba(255,255,255,0.3);
+    }
+    .progress{
+      background-color: #F00;
+      height: 0.1rem;
+      width: 8.4rem;
+      margin: 0 0.7rem 0 0.7rem;
+    }
+    .bar{
+      position:absolute;
+      border-radius: 50%;
+      width: 0.2rem;
+      height: 0.2rem;
+      background-color: #fff;
+      transform: translate(0,-0.05rem);
+    }
+    .finishpro{
+      position:relative;
+      background-color: #0F0;
+      height: 0.1rem;
+      width: 0rem;
+
+    }
+    .iconfont{
+      color: #fff;
+      float: left;
+      margin:0.65rem;
+      font-family:"iconfont" !important;
+      font-size:2rem;font-style:normal;
+      -webkit-font-smoothing: antialiased;
+      -webkit-text-stroke-width: 0.2px;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    
+    
+    .img{
+      width: 6.8rem;
+      height: 6.8rem;
+      margin: 0.2rem;
+      border-radius: 50%;
+    }
+    .imgRotate{
+      animation:myfirst 10s infinite linear; /*infinite 无限重复 linear 匀速*/
+    }
+    @keyframes myfirst{
+      from{transform:rotate(0deg);}
+      to{transform:rotate(360deg);}
+    }
+
+  </style>
+</head>
+<body >
+  <img src="picture/bg.jpg" class="bg">
+  <div style="position: absolute;width: 10rem;">
+    <div style="width: 10rem;">
+      <div id="title">音乐名</div>
+      <div id="author">作者</div>
+      <div class="imgS">
+        <div>
+          <img class="img" src="picture/aut.jpg">
+        </div>
+      </div>
+    </div>
+    <div style="width: 10rem;">
+      <div class="progress">
+        <div class="finishpro">
+          <div class="bar"></div>
+        </div>
+      </div>
+      
+      
+    </div>
+    <div>
+      <div class="iconfont">&#xe62e;</div>
+      <div class="iconfont" id="play">&#xe62d;</div>
+      <div class="iconfont" id="stop" style="display:none;">&#xe62c;</div>
+      <div class="iconfont">&#xe630;</div>
+    </div>
+    <audio src="http://music.163.com/song/media/outer/url?id=185868.mp3" id="audio"></audio>
+
+  </div>
+  
+  <script type="text/javascript">
+    var oPlay = document.getElementById("play");
+    var oStop = document.getElementById("stop");
+    var oAudio = document.getElementById("audio");
+    
+    var oBar = document.getElementsByClassName("bar")[0];
+    var oFin = document.getElementsByClassName("finishpro")[0];
+    var oPro = document.getElementsByClassName("progress")[0];
+    
+    
+    oPlay.onclick = function(){
+      oAudio.play();
+      oPlay.style.display = "none";
+      oStop.style.display = "block";
+      document.getElementsByClassName("img")[0].className = "img imgRotate";
+    };
+    oStop.onclick = function(){
+      oAudio.pause();
+      oStop.style.display = "none";
+      oPlay.style.display = "block";
+      document.getElementsByClassName("img")[0].className = "img";
+    };
+    
+    oPro.addEventListener("touchstart",touchStart); 
+    function touchStart(event){
+      oBar.style.left = oFin.style.width = (event.touches[0].clientX - 0.7*document.documentElement.clientWidth/10) +"px";
+      oAudio.removeEventListener("timeupdate",audioPlaying);
+    }
+    
+    oPro.addEventListener("touchmove",touchMove);
+    function touchMove(event){
+      if((event.touches[0].clientX - 0.7*document.documentElement.clientWidth/10) < 0 ){
+        oBar.style.left = oFin.style.width = 0 +"px";
+      }
+      else if((event.touches[0].clientX - 0.7*document.documentElement.clientWidth/10) > (8.4*document.documentElement.clientWidth/10)){
+        oBar.style.left = oFin.style.width = (8.4*document.documentElement.clientWidth/10) +"px";
+      }else{
+        oBar.style.left = oFin.style.width = (event.touches[0].clientX - 0.7*document.documentElement.clientWidth/10) +"px";
+      }
+    }
+    
+    oPro.addEventListener("touchend",touchEnd); 
+    function touchEnd(){
+      oAudio.currentTime = oAudio.duration*parseInt(oFin.style.width)/(8.4*document.documentElement.clientWidth/10);
+      oAudio.addEventListener("timeupdate",audioPlaying);
+    }
+    
+    
+    oAudio.addEventListener("timeupdate",audioPlaying);
+    function audioPlaying(){
+      oBar.style.left = oFin.style.width = ((8.4*document.documentElement.clientWidth/10)*oAudio.currentTime/oAudio.duration) + "px";
+    }
+    
+    oAudio.addEventListener("ended",audioEnded);
+    function audioEnded(){
+      document.getElementsByClassName("img")[0].className = "img";
+      oBar.style.left = oFin.style.width = 0 +"px";
+      oStop.style.display = "none";
+      oPlay.style.display = "block";
+    }
+    
+    
+  </script>
+  
+
+</body>
+</html>

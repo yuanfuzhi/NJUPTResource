@@ -1,0 +1,33 @@
+# depslib dependency file v1.0
+1478581827 source:f:\门禁信息系统\action.cpp
+	"Action.h"
+	<iostream>
+
+1478737301 f:\门禁信息系统\action.h
+	<string>
+
+1478567484 source:f:\门禁信息系统\interface.cpp
+	"Interface.h"
+	<iostream>
+	<iomanip>
+	<fstream>
+	<string>
+	<malloc.h>
+
+1478573089 f:\门禁信息系统\interface.h
+	"Action.h"
+
+1478753269 source:f:\门禁信息系统\main.cpp
+	<iostream>
+	"List.h"
+
+1478587502 source:f:\门禁信息系统\list.cpp
+	"List.h"
+	<iostream>
+	<fstream>
+
+1478742399 f:\门禁信息系统\list.h
+	"Action.h"
+	<iostream>
+	<fstream>
+

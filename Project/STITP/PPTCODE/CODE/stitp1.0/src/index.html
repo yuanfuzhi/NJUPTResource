@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    
+    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+    
+    <title></title>
+	
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+
+
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+	<script src="lib/ngCordova/dist/ng-cordova.js"></script>
+	<script src="cordova.js"></script>
+	<script src="js/jquery-3.2.1.js"></script>
+	<script src="js/app.js"></script>
+  <style>
+
+    .myCard{
+      position: relative;
+      height: 100vh;
+      width: 100%;
+      background-color: ;
+    }
+    .myItem{
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 100%;
+      padding: 20px;
+      transform: translateX(-50%) translateY(-50%);
+    }
+    .banner{
+      position: absolute;
+      display: none;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      margin: 0;
+      z-index: 11;
+      background-color: #DFDFDF;
+    }
+    .juzhong{
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translateX(-50%) translateY(-50%);
+    }
+    .loading{
+      font-size: 40px;
+      line-height: 40px;
+    }
+    .demo{
+      display: inline-block;
+      width: 32.5%;
+      cursor: pointer;
+    }
+    .demo img{
+      width: 100%;
+    }
+    .demo div{
+      width: 100%;
+      text-align: center;
+    }
+    .btn{
+      position: relative;
+      width: 300px;
+      margin: 0 auto;
+      cursor: pointer;
+    }
+    .btn img{
+      width: 100%;
+    }
+    .shuoming{
+      position: relative;
+      width: 100%;
+      top: -20px;
+      margin-bottom: 20px;
+      text-align: center;
+      font-weight: 900;
+    }
+    .content{
+      position: relative;
+      margin-top: 30px;
+      font-size: 25px;
+      line-height: 30px;
+
+    }
+  </style>
+  </head>
+  <body ng-app="cordova-camera">
+
+      <div class="banner">
+      <div class="juzhong">
+        <div class="loading">
+          Loading...
+        </div>
+
+        <div class="content">
+        </div>
+
+      </div>
+    </div>
+
+
+
+      	<div class="myCard" ng-controller="CameraCtrl">
+
+	      	<div class="myItem">
+		      	<div
+		      		ng-click="takePicture()"
+		      		class="btn">
+              <img src="picture/logo.png">
+              <div class="shuoming">
+                点击录取情绪
+              </div>
+		      	</div>
+
+
+            <span class="demo">
+              <img ng-click="playMusic(0)" src="picture/xiao.png"><br>
+              <div>样例:开心</div>
+            </span>
+            <span class="demo">
+              <img ng-click="playMusic(1)" src="picture/nanguo.png"><br>
+              <div>样例:难过</div>
+            </span>
+            <span class="demo">
+              <img ng-click="playMusic(2)" src="picture/fennu.png"><br>
+              <div>样例:厌恶</div>
+            </span>
+	      	</div>
+
+      	</div>
+
+
+  </body>
+</html>
